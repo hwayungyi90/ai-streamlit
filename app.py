@@ -701,14 +701,14 @@ with col2:
     st.markdown("### 🎯 키워드 입력")
     
     keyword_input = st.text_input(
-        "",
+        "키워드",
         placeholder="키워드 입력 (쉼표 또는 띄어쓰기로 구분, 예: 마케팅,쇼핑몰 또는 마케팅 쇼핑몰)",
         label_visibility="collapsed"
     )
     
     st.caption("💡 여러 키워드는 쉼표(,) 또는 띄어쓰기로 구분해서 입력하세요")
     
-    search_button = st.button("🔍 키워드 분석 시작", use_container_width=True)
+    search_button = st.button("🔍 키워드 분석 시작", width='stretch')
 
 # 결과 표시
 if search_button:
@@ -762,7 +762,7 @@ if 'df' in st.session_state:
         
         for idx, kw in enumerate(related_keywords[:10]):
             with cols[idx % num_cols]:
-                if st.button(f"#{idx+1} {kw}", key=f"related_{idx}", use_container_width=True):
+                if st.button(f"#{idx+1} {kw}", key=f"related_{idx}", width='stretch'):
                     st.session_state['secondary_keyword'] = kw
                     st.session_state['secondary_df'] = None
                     st.session_state['secondary_related'] = None
@@ -849,7 +849,7 @@ if 'df' in st.session_state:
                 if 'monthlyMobileQcCnt' in sec_df_display.columns:
                     sec_df_display = sec_df_display.sort_values(by='monthlyMobileQcCnt', ascending=False)
                 
-                st.dataframe(sec_df_display, use_container_width=True, height=300)
+                st.dataframe(sec_df_display, width='stretch', height=300)
                 
                 # 다운로드 버튼
                 sec_csv = sec_df.to_csv(index=False, encoding='utf-8-sig')
@@ -947,7 +947,7 @@ if 'df' in st.session_state:
         # 데이터프레임 표시
         st.dataframe(
             df_display,
-            use_container_width=True,
+            width='stretch',
             height=400
         )
     
@@ -1006,7 +1006,7 @@ if 'df' in st.session_state:
                 )
             )
             
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
             
             # 파이 차트 - PC vs 모바일 비율
             if 'monthlyPcQcCnt' in df_numeric.columns and 'monthlyMobileQcCnt' in df_numeric.columns:
@@ -1031,7 +1031,7 @@ if 'df' in st.session_state:
                     )
                     fig_pie.update_traces(textfont=dict(color='#f1f5f9', size=12))
                     
-                    st.plotly_chart(fig_pie, use_container_width=True)
+                    st.plotly_chart(fig_pie, width='stretch')
                 
                 with col2:
                     # 경쟁도 분포
@@ -1053,7 +1053,7 @@ if 'df' in st.session_state:
                         )
                         fig_comp.update_traces(textfont=dict(color='#f1f5f9', size=12))
                         
-                        st.plotly_chart(fig_comp, use_container_width=True)
+                        st.plotly_chart(fig_comp, width='stretch')
     
     with tab3:
         st.markdown("#### ⬇️ 데이터 다운로드")
@@ -1068,7 +1068,7 @@ if 'df' in st.session_state:
                 data=csv,
                 file_name=f"네이버_키워드분석_{keyword}_{time.strftime('%Y%m%d')}.csv",
                 mime="text/csv",
-                use_container_width=True
+                width='stretch'
             )
         
         with col2:
@@ -1078,7 +1078,7 @@ if 'df' in st.session_state:
                 data=csv,
                 file_name=f"네이버_키워드분석_{keyword}_{time.strftime('%Y%m%d')}.csv",
                 mime="application/vnd.ms-excel",
-                use_container_width=True
+                width='stretch'
             )
         
         st.info("💡 TIP: CSV 파일은 Excel에서 열 때 UTF-8 인코딩으로 열어주세요.")
